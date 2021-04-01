@@ -23,15 +23,15 @@ public class SensorValidatorTest {
   
   @Test
   public void reportsErrorWhenSOCReadingIsNull() {
-    exceptionRule.expect(NullPointerException.class);
-    exceptionRule.expectMessage("Please provide proper 'SOC reading' values, Provided value is null!");
+	exceptionRule.expect(NullPointerException.class);
+	exceptionRule.expectMessage(SensorValidator.getValidationMsg("'SOC reading'", null));
     assertFalse(SensorValidator.validateSOCreadings(null));
   }
   
   @Test
   public void reportsErrorWhenSOCReadingIsEmpty() {
-    exceptionRule.expect(IllegalArgumentException.class);
-    exceptionRule.expectMessage("Please provide proper 'SOC reading' values, Provided value is empty!");
+	exceptionRule.expect(IllegalArgumentException.class);
+	exceptionRule.expectMessage(SensorValidator.getValidationMsg("'SOC reading'", "empty"));
     Double[] readings = { };
     List<Double> socs = Arrays.asList(readings);
     assertFalse(SensorValidator.validateSOCreadings(socs));
@@ -46,16 +46,16 @@ public class SensorValidatorTest {
   
   @Test
   public void reportsErrorWhenCurrentReadingIsNull() {
-    exceptionRule.expect(NullPointerException.class);
-    exceptionRule.expectMessage("Please provide proper 'Current reading' values, Provided value is null!");
+	exceptionRule.expect(NullPointerException.class);
+	exceptionRule.expectMessage(SensorValidator.getValidationMsg("'Current reading'", null));
     List<Double> currents = null;
     assertFalse(SensorValidator.validateCurrentreadings(currents));
   }
   
   @Test
   public void reportsErrorWhenCurrentReadingIsEmpty() {
-    exceptionRule.expect(IllegalArgumentException.class);
-    exceptionRule.expectMessage("Please provide proper 'Current reading' values, Provided value is empty!");
+	 exceptionRule.expect(IllegalArgumentException.class);
+	 exceptionRule.expectMessage(SensorValidator.getValidationMsg("'Current reading'", "empty"));
     List<Double> currents = Arrays.asList();
     assertFalse(SensorValidator.validateCurrentreadings(currents));
   }
